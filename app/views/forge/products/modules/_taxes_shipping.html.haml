@@ -1,0 +1,22 @@
+.inner-form.no-top.with-normal-sidebar
+  .column.side
+    %h3 Taxes
+    .explanation Applicable taxes.
+    - Country.active.all.each do |country|
+      %hr
+      %strong= country.title
+      %br/
+      - country.tax_rates.each do |tr|
+        %label
+          = check_box_tag 'product[tax_rate_ids][]', tr.id, @product.new_record? ? true : @product.tax_rates.include?(tr)
+          = number_to_percentage(tr.rate, :precision => 2)
+          = tr.title
+        %br/
+
+  .column.main.last
+
+    - if MySettings.flat_rate_shipping
+      = f.text_field :flat_rate_shipping, :size => 6, :label => "Shipping Flate Rate", :explanation => "The rate you charge to ship this product on a per-product basis. 8.00 = $8.00.", :last => true
+
+
+  .spacer

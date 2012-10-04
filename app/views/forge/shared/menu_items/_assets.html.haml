@@ -1,0 +1,3 @@
+- if can?(:manage, Asset)
+  - item = "asset_library"
+  = forge_menu_item item, forge_assets_path, :active => is_active("assets"), :submenu => false

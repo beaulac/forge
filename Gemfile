@@ -1,0 +1,78 @@
+source 'http://rubygems.org'
+source 'http://gems.github.com'
+source 'http://gemcutter.org'
+
+# The Heavy Hitters
+gem 'rack'
+gem 'rake', '0.9.2'
+gem 'rails', '3.2.1'
+gem 'mysql2'
+
+# The Plugins
+gem 'aasm'
+gem 'active_shipping', :git => 'git://github.com/Shopify/active_shipping.git'
+gem 'activemerchant'
+gem 'acts-as-taggable-on'
+gem 'acts_as_ferret', '>= 0.5'
+gem 'aws-s3'
+gem 'aws-sdk'
+gem 'cache_trasher'
+gem 'cancan'
+gem 'capistrano'
+gem 'delayed_job_active_record'
+gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
+gem 'dynamic_form'
+gem 'exception_notification', :require => 'exception_notifier'
+gem 'gravatar_image_tag'
+gem 'guard-rspec'
+gem 'guard-spork'
+gem 'haml'
+gem 'hpricot'
+gem 'httparty'
+gem 'jquery-rails'
+gem 'mediaelement_rails'
+gem 'mime-types'
+gem 'paperclip'
+gem 'rdiscount'
+gem 'rails-settings', :git => 'git://github.com/100hz/rails-settings.git'
+gem 'simple-rss'
+gem 'spawn', :git => 'git://github.com/rfc2822/spawn'
+gem 'uuidtools'
+gem 'will_paginate', '~> 3.0.pre2'
+gem 'yaml_db'
+gem 'zencoder'
+gem 'zencoder-fetcher'
+
+
+# The Groups
+group :development, :test do
+  gem 'faker'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'factory_girl_rails', '1.3.0'
+  gem 'rspec-rails', '>= 2.0.1'
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  gem 'spork', '~> 0.9.0.rc'
+  gem 'zentest-without-autotest', '4.4.0'
+end
+
+group :assets do
+  gem 'coffee-rails'
+  gem 'sass-rails'
+  gem 'uglifier', ' >= 1.0.3'
+end
+
+group :darwin do
+  gem 'growl'
+  gem 'rb-fsevent'
+end
+
+group :linux do
+  # if this stuff stops working for you, maybe it's because Adrian removed these gems from the :test group:
+  # gem 'autotest-standalone'
+  # gem 'autotest-rails-pure'
+  gem 'autotest-inotify'
+end
