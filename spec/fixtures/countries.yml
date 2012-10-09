@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-canada:
-  title: Canada
-  code: CA
-
-us:
-  title: United States of America
-  code: US
