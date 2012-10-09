@@ -63,6 +63,59 @@ describe Event do
     @event.errors_on(:ends_at_time).should_not be_nil
   end
 
+  context '#next' do
+    it 'returns the next newest event by starts_at' do
+      oldest = Event.create(
+        :title => 'oldest',
+        :location => 'foo',
+        :description => 'bar',
+        :starts_at => Time.parse('january 1 1970'),
+        :published => true)
+
+      middle = Event.create(
+        :title => 'middle',
+        :location => 'foo',
+        :description => 'bar',
+        :starts_at => Time.parse('january 1 1985'),
+        :published => true)
+
+      newest = Event.create(
+        :title => 'newest',
+        :location => 'foo',
+        :description => 'bar',
+        :starts_at => Time.parse('january 1 2000'), 
+        :published => true)
+
+      oldest.next.should == middle # and not newest!
+    end
+  end
+
+  context '#previous' do
+    it 'returns the next oldest event by starts_at' do
+      oldest = Event.create(
+        :title => 'oldest',
+        :location => 'foo',
+        :description => 'bar',
+        :starts_at => Time.parse('january 1 1970'),
+        :published => true)
+
+      middle = Event.create(
+        :title => 'middle',
+        :location => 'foo',
+        :description => 'bar',
+        :starts_at => Time.parse('january 1 1985'),
+        :published => true)
+
+      newest = Event.create(
+        :title => 'newest',
+        :location => 'foo',
+        :description => 'bar',
+        :starts_at => Time.parse('january 1 2000'), 
+        :published => true)
+
+      newest.previous.should == middle # and not oldest!
+    end
+  end
 end
 
 

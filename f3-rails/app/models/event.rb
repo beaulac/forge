@@ -20,14 +20,20 @@ class Event < ActiveRecord::Base
 
   # Relationships
 
-
-
   def display_date
-    if starts_at.strftime('%B%d%Y') == ends_at.strftime('%B%d%Y')
-      return starts_at.strftime('%B %d, %Y') + " from " + starts_at.strftime('%I:%M%p') + " until " + ends_at.strftime('%I:%M%p')
+    if starts_at_date == ends_at_date
+      "#{starts_at.strftime('%B %d, %Y')} from #{starts_at.strftime('%I:%M%p')} until #{ends_at.strftime('%I:%M%p')}"
     else
-      return starts_at.strftime("%B %d, %Y at %I:%M%p") + " until " + ends_at.strftime("%B %d, %Y at %I:%M%p")
+      "#{starts_at.strftime("%B %d, %Y at %I:%M%p")} until #{ends_at.strftime("%B %d, %Y at %I:%M%p")}"
     end
+  end
+
+  def next
+    Event.published.where('starts_at > ?', starts_at).first
+  end
+
+  def previous
+    Event.published.where('starts_at < ?', starts_at).last
   end
 
   private

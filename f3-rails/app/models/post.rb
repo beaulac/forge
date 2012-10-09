@@ -49,7 +49,7 @@ class Post < ActiveRecord::Base
 
   private
   def set_created_at
-    created_at_date && created_at_time && created_at = "#{created_at_date} #{created_at_time}"
+    created_at_date && created_at_time && self.created_at = "#{created_at_date} #{created_at_time}"
   end
 
 end
