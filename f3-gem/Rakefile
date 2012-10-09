@@ -1,0 +1,31 @@
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift lib
+
+require "version"
+# require 'FileUtils'
+
+desc "Copy the required Rails files over into the gem project"
+task :copy do
+  # We need to copy over the Rails files that we need
+  #
+  puts "Please wait, copying files from Rails project into the gem..."
+  # 1. Remove the old ones
+  FileUtils.rm_r lib + "/generators/f3/templates/f3-rails" rescue nil # might not exist
+  # 2. Copy over the current ones
+  FileUtils.cp_r File.expand_path("../f3-rails"), lib + "/generators/f3/templates"
+end
+
+desc "Freshly install the gem"
+task :fresh do
+  system "gem uninstall f3"
+  system "gem build f3.gemspec"
+  system "gem install f3"
+end
+ 
+task :build do
+  system "gem build f3.gemspec"
+end
+ 
+task :release => :build do
+  system "gem push f3-#{F3::VERSION}"
+end
