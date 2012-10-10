@@ -75,19 +75,19 @@ describe Event do
     @event.errors_on(:ends_at_time).should_not be_nil
   end
 
-  #context '#next' do
+  context '#next' do
     it 'returns the next newest event by starts_at' do
       @older_event.next.should == @event
     end
-  #end
+  end
 
-  #context '#previous' do
+  context '#previous' do
     it 'returns the next oldest event by starts_at' do
       @event.previous.should == @older_event
     end
-  #end
+  end
 
-  #context '.on' do
+  context '.on' do
     it 'finds events in a given year' do
       Event.on(@event.starts_at.year).should == [@event]
     end
@@ -99,7 +99,7 @@ describe Event do
     it 'finds events on a given day' do
       Event.on(@event.starts_at.year, @event.starts_at.month, @event.starts_at.day).should == [@event]
     end
-  #end
+  end
 end
 
 
