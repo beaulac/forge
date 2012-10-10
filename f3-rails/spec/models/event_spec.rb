@@ -2,7 +2,19 @@ require 'spec_helper'
 
 describe Event do
   before do
-    @event = Event.new :title => "Title", :location => "Location", :description => "Description"
+    @event = Event.create(
+      :title => "Title",
+      :location => "Location",
+      :description => "Description",
+      :starts_at => Time.now,
+      :published => true)
+
+    @older_event = Event.create(
+      :title => "Older Title",
+      :location => "Older Location",
+      :description => "Older Description",
+      :starts_at => Time.mktime(1970, 1, 1),
+      :published => true)
   end
 
   it "doesn't update starts_at unless asked to" do
@@ -63,59 +75,31 @@ describe Event do
     @event.errors_on(:ends_at_time).should_not be_nil
   end
 
-  context '#next' do
+  #context '#next' do
     it 'returns the next newest event by starts_at' do
-      oldest = Event.create(
-        :title => 'oldest',
-        :location => 'foo',
-        :description => 'bar',
-        :starts_at => Time.parse('january 1 1970'),
-        :published => true)
-
-      middle = Event.create(
-        :title => 'middle',
-        :location => 'foo',
-        :description => 'bar',
-        :starts_at => Time.parse('january 1 1985'),
-        :published => true)
-
-      newest = Event.create(
-        :title => 'newest',
-        :location => 'foo',
-        :description => 'bar',
-        :starts_at => Time.parse('january 1 2000'), 
-        :published => true)
-
-      oldest.next.should == middle # and not newest!
+      @older_event.next.should == @event
     end
-  end
+  #end
 
-  context '#previous' do
+  #context '#previous' do
     it 'returns the next oldest event by starts_at' do
-      oldest = Event.create(
-        :title => 'oldest',
-        :location => 'foo',
-        :description => 'bar',
-        :starts_at => Time.parse('january 1 1970'),
-        :published => true)
-
-      middle = Event.create(
-        :title => 'middle',
-        :location => 'foo',
-        :description => 'bar',
-        :starts_at => Time.parse('january 1 1985'),
-        :published => true)
-
-      newest = Event.create(
-        :title => 'newest',
-        :location => 'foo',
-        :description => 'bar',
-        :starts_at => Time.parse('january 1 2000'), 
-        :published => true)
-
-      newest.previous.should == middle # and not oldest!
+      @event.previous.should == @older_event
     end
-  end
+  #end
+
+  #context '.on' do
+    it 'finds events in a given year' do
+      Event.on(@event.starts_at.year).should == [@event]
+    end
+
+    it 'finds events in a given month' do
+      Event.on(@event.starts_at.year, @event.starts_at.month).should == [@event]
+    end
+
+    it 'finds events on a given day' do
+      Event.on(@event.starts_at.year, @event.starts_at.month, @event.starts_at.day).should == [@event]
+    end
+  #end
 end
 
 

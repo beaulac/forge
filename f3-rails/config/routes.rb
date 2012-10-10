@@ -63,7 +63,13 @@ Forge3::Application.routes.draw do
   end
   resources :comments, :only => [:create, :destroy]
   #resources :galleries # we don't seem to have a galleries controller
+
   resources :events, :only => [:index, :show]
+
+  if Forge::Settings[:events][:display] == 'calendar'
+    match 'events/:year/:month' => 'events#index', :via => :get
+  end
+
   resources :dispatches, :only => [] do
     get 'read', 'unsubscribe', :on => :member
     resources :links, :controller => :dispatch_links, :only => [:show]

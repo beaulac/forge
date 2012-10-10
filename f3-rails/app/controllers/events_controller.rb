@@ -15,6 +15,8 @@ class EventsController < ApplicationController
 
       template = 'events/index_calendar'
     else
+      @events = @events.group_by { |e| e.starts_at.strftime('%Y/%m') }
+
       template = 'events/index_list'
     end
 

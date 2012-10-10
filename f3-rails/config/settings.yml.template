@@ -10,6 +10,10 @@
 #   french: fr
 #   german: de
 
+# display events as a 'list' or 'calendar'?
+events:
+  display: calendar
+
 # The currency that funds are accepted in. Caution: MUST be an ISO 4217 currency code. Common codes: USD, CAD, EUR.
 currency: CAD
 
