@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216022902) do
+ActiveRecord::Schema.define(:version => 20121114171612) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -286,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20120216022902) do
 
   add_index "pages", ["creator_id"], :name => "index_pages_on_creator_id"
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
+  add_index "pages", ["slug"], :name => "index_pages_on_slug"
   add_index "pages", ["updater_id"], :name => "index_pages_on_updater_id"
 
   create_table "photos", :force => true do |t|
