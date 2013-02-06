@@ -10,7 +10,7 @@ Forge 3: Makin' It Work
 * have bundler working
 
 * cd ~/to/parent/directory
-* git clone git@github.com:factore/forge3.git
+* git clone git@github.com:socialtech/forge3.git
 * cd forge3
 * bundle install --path vendor --without linux
 * cp config/database.yml.template config/database.yml
